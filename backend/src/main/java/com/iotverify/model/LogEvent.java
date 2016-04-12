@@ -1,25 +1,37 @@
 package com.iotverify.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by Le on 4/11/2016.
  */
+@Entity
+@Table(name="log_events")
 public class LogEvent {
-    private long logEventId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long logEventId;
+    @Column(name = "event_name")
     private String eventName;
+    @Column(name = "event_description")
     private String eventDescription;
+    @Column(name = "creation_date")
     private Date creationDate;
+    @Column(name = "device_UUID")
     private UUID deviceUUID;
-    private long userId;
-    private long tagId;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "tag_id")
+    private Long tagId;
 
-    public long getLogEventId() {
+    public Long getLogEventId() {
         return logEventId;
     }
 
-    public void setLogEventId(long logEventId) {
+    public void setLogEventId(Long logEventId) {
         this.logEventId = logEventId;
     }
 
@@ -55,19 +67,19 @@ public class LogEvent {
         this.deviceUUID = deviceUUID;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public long getTagId() {
+    public Long getTagId() {
         return tagId;
     }
 
-    public void setTagId(long tagId) {
+    public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 }

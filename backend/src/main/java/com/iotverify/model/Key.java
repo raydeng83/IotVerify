@@ -1,22 +1,32 @@
 package com.iotverify.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Le on 4/11/2016.
  */
+@Entity
+@Table(name="user_keys")
 public class Key {
-    private long keyId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long keyId;
+    @Column(name = "user_key")
     private String key;
+    @Column(name = "level")
     private int level;
-    private int ignore_limits;
-    private Date date_created;
+    @Column(name = "ignore_limits")
+    private int ignoreLimits;
+    @Column(name = "date_created")
+    private Date dateCreated;
 
-    public long getKeyId() {
+    public Long getKeyId() {
         return keyId;
     }
 
-    public void setKeyId(long keyId) {
+    public void setKeyId(Long keyId) {
         this.keyId = keyId;
     }
 
@@ -36,19 +46,19 @@ public class Key {
         this.level = level;
     }
 
-    public int getIgnore_limits() {
-        return ignore_limits;
+    public int getIgnoreLimits() {
+        return ignoreLimits;
     }
 
-    public void setIgnore_limits(int ignore_limits) {
-        this.ignore_limits = ignore_limits;
+    public void setIgnoreLimits(int ignoreLimits) {
+        this.ignoreLimits = ignoreLimits;
     }
 
-    public Date getDate_created() {
-        return date_created;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

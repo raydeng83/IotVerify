@@ -1,29 +1,38 @@
 package com.iotverify.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Le on 4/11/2016.
  */
+@Entity
+@Table(name="phone_numbers")
 public class PhoneNumber {
-    private long phoneNumberId;
-    private long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long phoneNumberId;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "creation_date")
     private Date creationDate;
 
-    public long getPhoneNumberId() {
+    public Long getPhoneNumberId() {
         return phoneNumberId;
     }
 
-    public void setPhoneNumberId(long phoneNumberId) {
+    public void setPhoneNumberId(Long phoneNumberId) {
         this.phoneNumberId = phoneNumberId;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

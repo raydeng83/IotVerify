@@ -1,24 +1,39 @@
 package com.iotverify.model;
 
+import javax.persistence.*;
+
 /**
  * Created by lede on 4/7/16.
  */
+@Entity
+@Table(name="devices")
 public class Device {
-    private long deviceId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private Long deviceId;
+    @Column(name = "device_UUID")
     private String deviceUUID;
+    @Column(name = "user_id")
     private String deviceCompUdid;
+    @Column(name = "tag_ID")
     private String tagId;
+    @Column(name = "android_id")
     private String androidId;
+    @Column(name = "device_name")
     private String deviceName;
+    @Column(name = "imei")
     private String imei;
+    @Column(name = "wifi_mac_address")
     private String wifiMacAddress;
+    @Column(name = "serial_no")
     private String serialNo;
 
-    public long getDeviceId() {
+    public Long getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(Long deviceId) {
         this.deviceId = deviceId;
     }
 

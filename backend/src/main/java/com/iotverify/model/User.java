@@ -1,28 +1,44 @@
 package com.iotverify.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Le on 4/11/2016.
  */
+@Entity
+@Table(name="users")
 public class User {
-    private long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long userId;
+    @Column(name = "full_name")
     private String fullName;
+    @Column(name = "user_name")
     private String userName;
+    @Column(name = "password")
     private String password;
+    @Column(name = "email_address")
     private String emailAddress;
+    @Column(name = "type")
     private String type;
+    @Column(name = "creation_date")
     private Date creationDate;
-    private long tokenId;
-    private long tokenExpireTime;
+    @Column(name = "token_id")
+    private Long tokenId;
+    @Column(name = "token_expire_time")
+    private Long tokenExpireTime;
+    @Column(name = "uid")
     private String UID;
+    @Column(name = "temp_token")
     private String tempToken;
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -74,19 +90,19 @@ public class User {
         this.creationDate = creationDate;
     }
 
-    public long getTokenId() {
+    public Long getTokenId() {
         return tokenId;
     }
 
-    public void setTokenId(long tokenId) {
+    public void setTokenId(Long tokenId) {
         this.tokenId = tokenId;
     }
 
-    public long getTokenExpireTime() {
+    public Long getTokenExpireTime() {
         return tokenExpireTime;
     }
 
-    public void setTokenExpireTime(long tokenExpireTime) {
+    public void setTokenExpireTime(Long tokenExpireTime) {
         this.tokenExpireTime = tokenExpireTime;
     }
 
