@@ -25,7 +25,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     core_1.Component({
                         selector: 'nav-bar',
                         templateUrl: 'app/nav-bar.component.html',
-                        styleUrls: ['app/nav-bar.component.html']
+                        styleUrls: ['app/nav-bar.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NavBar);
