@@ -1,4 +1,4 @@
-System.register(['angular2/core', './user-list.component'], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,32 +10,29 @@ System.register(['angular2/core', './user-list.component'], function(exports_1, 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_list_component_1;
-    var AppComponent;
+    var core_1;
+    var NavBar;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (user_list_component_1_1) {
-                user_list_component_1 = user_list_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            NavBar = (function () {
+                function NavBar() {
                 }
-                AppComponent = __decorate([
+                NavBar = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        directives: [user_list_component_1.UserList],
-                        template: "\n      <user-list></user-list>\n    "
+                        selector: 'nav-bar',
+                        templateUrl: 'app/nav-bar.component.html',
+                        styleUrls: ['app/nav-bar.component.html']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], NavBar);
+                return NavBar;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("NavBar", NavBar);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=nav-bar.component.js.map
