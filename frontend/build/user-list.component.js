@@ -10,17 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var user_service_1 = require('./user.service');
-var nav_bar_component_1 = require('./nav-bar.component');
 var UserList = (function () {
-    function UserList(_userService) {
-        this._userService = _userService;
+    function UserList(userService) {
+        this.userService = userService;
+        this.getUsers();
     }
     UserList.prototype.ngOnInit = function () {
-        this.getUsers();
     };
     UserList.prototype.getUsers = function () {
         var _this = this;
-        this._userService.getUsers().subscribe(
+        this.userService.getUsers().subscribe(
         // the first argument is a function which runs on success
         function (data) { _this.users = data; }, 
         // the second argument is a function which runs on error
@@ -31,7 +30,6 @@ var UserList = (function () {
     UserList = __decorate([
         core_1.Component({
             selector: 'user-list',
-            directives: [nav_bar_component_1.NavBar],
             templateUrl: 'app/user-list.component.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService])

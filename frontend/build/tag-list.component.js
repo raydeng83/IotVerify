@@ -9,19 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var UserService = (function () {
-    function UserService(http) {
-        this.http = http;
+var TagList = (function () {
+    function TagList() {
     }
-    UserService.prototype.getUsers = function () {
-        return this.http.get('http://localhost:8080/rest/user/users').map(function (res) { return res.json(); });
-    };
-    UserService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], UserService);
-    return UserService;
+    TagList = __decorate([
+        core_1.Component({
+            selector: 'tag-list',
+            templateUrl: 'app/tag-list.component.html'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TagList);
+    return TagList;
 }());
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+exports.TagList = TagList;
+//# sourceMappingURL=tag-list.component.js.map
