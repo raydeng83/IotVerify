@@ -1,21 +1,25 @@
 <nav-bar></nav-bar>
 <div class="container">
-  <table class="table table-hover table-bordered">
+  <table class="ui celled striped table">
+    <thead>
     <tr>
-      <th class="info">Sr#</th>
-      <th class="info">Full Name</th>
-      <th class="info">User Name</th>
-      <th class="info">UID</th>
-      <th class="info">Phone Numbers</th>
-      <th class="info">Action</th>
+      <th >Sr#</th>
+      <th >Full Name</th>
+      <th >User Name</th>
+      <th >UID</th>
+      <th >Phone Numbers</th>
+      <th >Action</th>
     </tr>
-    <tr *ngFor = "#user of users">
+    </thead>
+    <tbody>
+    <tr *ngFor = "let user of users">
       <td>{{user.userId}}</td>
       <td>{{user.fullName}}</td>
       <td>{{user.userName}}</td>
       <td>{{user.uid}}</td>
       <td>phone number</td>
-      <td><a>delete</a></td>
+      <td><a style="cursor: pointer;">delete</a></td>
     </tr>
+    </tbody>
   </table>
 </div>
