@@ -9,4 +9,7 @@ import java.util.List;
  */
 public interface LogEventService {
     List<LogEvent> findAll();
+
+    void deleteByUserId (Long userId);
+
 }

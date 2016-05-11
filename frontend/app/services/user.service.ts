@@ -15,4 +15,8 @@ export class UserService {
   getUserByUserId(userId:number) {
     return this.http.post('http://localhost:8080/rest/user/userId', userId+'').map((res:Response) => res.json());
   }
+
+  deleteUser(userId: number) {
+    return this.http.delete('http://localhost:8080/rest/user/delete/'+userId).map((res:Response) => res.json());
+  }
 }

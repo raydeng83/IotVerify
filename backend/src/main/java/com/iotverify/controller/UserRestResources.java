@@ -2,12 +2,11 @@ package com.iotverify.controller;
 
 import com.iotverify.model.Device;
 import com.iotverify.model.User;
+import com.iotverify.service.DeviceService;
+import com.iotverify.service.LogEventService;
 import com.iotverify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,12 @@ public class UserRestResources {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DeviceService deviceService;
+
+    @Autowired
+    private LogEventService logEventService;
+
     @RequestMapping("/users")
     public List<User> getUsers() {
         return userService.getUsers();
@@ -29,6 +34,14 @@ public class UserRestResources {
     @RequestMapping(value="/userId", method = RequestMethod.POST)
     public User findByUserId(@RequestBody String userId) {
         return userService.findByUserId(Long.parseLong(userId));
+    }
+
+
+    @RequestMapping(value="/delete/{userId}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable(value = "userId") String userId) {
+        deviceService.deleteByDeviceCompUdid(userId);
+        logEventService.deleteByUserId(Long.parseLong(userId));
+        userService.delete(Long.parseLong(userId));
     }
 
 }

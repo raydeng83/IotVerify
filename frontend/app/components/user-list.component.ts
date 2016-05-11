@@ -10,6 +10,7 @@ export class UserList {
   public users: User[];
 
   constructor (private userService: UserService) {
+
     this.getUsers();
   }
 
@@ -22,5 +23,16 @@ export class UserList {
       // the third argument is a function which runs on completion
       () => console.log('done loading')
     );
+  }
+
+  onDelete(userId: number) {
+    this.userService.deleteUser(userId).subscribe(
+      // the first argument is a function which runs on success
+      data => this.getUsers(),
+      // the second argument is a function which runs on error
+      err => console.error(err),
+      // the third argument is a function which runs on completion
+      () => console.log('done loading')
+    )
   }
 }

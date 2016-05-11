@@ -13,4 +13,6 @@ import java.util.List;
 @Repository
 public interface LogEventDao extends CrudRepository<LogEvent, Long>{
     List<LogEvent> findAll();
+
+    void deleteByUserId (Long userId);
 }

@@ -20,6 +20,9 @@ var UserService = (function () {
     UserService.prototype.getUserByUserId = function (userId) {
         return this.http.post('http://localhost:8080/rest/user/userId', userId + '').map(function (res) { return res.json(); });
     };
+    UserService.prototype.deleteUser = function (userId) {
+        return this.http.delete('http://localhost:8080/rest/user/delete/' + userId).map(function (res) { return res.json(); });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

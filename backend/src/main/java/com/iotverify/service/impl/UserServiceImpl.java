@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService{
         return userDao.findByUserId(userId);
     }
 
+    public void delete(Long userId) {
+        userDao.delete(userId);
+    }
+
+
 }

@@ -5,6 +5,7 @@ import com.iotverify.model.Device;
 import com.iotverify.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,4 +26,11 @@ public class DeviceServiceImpl implements DeviceService {
     public List<Device> findAll() {
         return deviceDao.findAll();
     }
+
+
+    @Transactional
+    public void deleteByDeviceCompUdid(String userId) {
+        deviceDao.deleteByDeviceCompUdid(userId);
+    }
+
 }

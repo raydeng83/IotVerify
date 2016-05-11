@@ -13,4 +13,7 @@ public interface DeviceService {
 
     List<Device> findAll();
 
+    void deleteByDeviceCompUdid(String userId);
+
+
 }
