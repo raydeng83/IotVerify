@@ -1,18 +1,16 @@
 import {Component} from '@angular/core';
-import {UserService} from './user.service';
+import {UserService} from '../services/user.service';
+import {User} from '../models/user';
 
 @Component({
   selector:'user-list',
-  templateUrl: 'app/user-list.component.html'
+  templateUrl: 'app/components/user-list.component.html'
 })
 export class UserList {
-  public users;
+  public users: User[];
 
   constructor (private userService: UserService) {
     this.getUsers();
-  }
-
-  ngOnInit() {
   }
 
   getUsers() {

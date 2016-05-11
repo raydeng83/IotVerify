@@ -17,8 +17,8 @@ var NavBar = (function () {
         core_1.Component({
             selector: 'nav-bar',
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
-            templateUrl: 'app/nav-bar.component.html',
-            styleUrls: ['app/nav-bar.component.css']
+            templateUrl: 'app/components/nav-bar.component.html',
+            styleUrls: ['app/components/nav-bar.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], NavBar);

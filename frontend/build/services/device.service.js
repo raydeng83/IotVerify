@@ -9,17 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var TagList = (function () {
-    function TagList() {
+var http_1 = require('@angular/http');
+var DeviceService = (function () {
+    function DeviceService(http) {
+        this.http = http;
     }
-    TagList = __decorate([
-        core_1.Component({
-            selector: 'tag-list',
-            templateUrl: 'app/tag-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TagList);
-    return TagList;
+    DeviceService.prototype.findDevicesByUserId = function (userId) {
+        return this.http.post('http://localhost:8080/rest/device/userId', userId + '').map(function (res) { return res.json(); });
+    };
+    DeviceService.prototype.findAllDevices = function () {
+        return this.http.get('http://localhost:8080/rest/device/allDevices').map(function (res) { return res.json(); });
+    };
+    DeviceService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], DeviceService);
+    return DeviceService;
 }());
-exports.TagList = TagList;
-//# sourceMappingURL=tag-list.component.js.map
+exports.DeviceService = DeviceService;
+//# sourceMappingURL=device.service.js.map

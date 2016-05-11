@@ -17,6 +17,9 @@ var UserService = (function () {
     UserService.prototype.getUsers = function () {
         return this.http.get('http://localhost:8080/rest/user/users').map(function (res) { return res.json(); });
     };
+    UserService.prototype.getUserByUserId = function (userId) {
+        return this.http.post('http://localhost:8080/rest/user/userId', userId + '').map(function (res) { return res.json(); });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

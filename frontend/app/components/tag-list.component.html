@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th>User name</th>
+                <th>Tag ID</th>
+                <th>Device Name</th>
+                <th>Serial No</th>
+                <th>Device UDID</th>
+                <th>Android ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tag of tags">
+                <td>{{tag.userName}}</td>
+                <td>{{tag.tagId}}</td>
+                <td>{{tag.deviceName}}</td>
+                <td>{{tag.serialNo}}</td>
+                <td>{{tag.deviceUdid}}</td>
+                <td>{{tag.androidId}}</td>
+                <td><a style="cursor: pointer;">delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

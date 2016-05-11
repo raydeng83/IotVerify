@@ -9,14 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_service_1 = require('./user.service');
+var user_service_1 = require('../services/user.service');
 var UserList = (function () {
     function UserList(userService) {
         this.userService = userService;
         this.getUsers();
     }
-    UserList.prototype.ngOnInit = function () {
-    };
     UserList.prototype.getUsers = function () {
         var _this = this;
         this.userService.getUsers().subscribe(
@@ -30,7 +28,7 @@ var UserList = (function () {
     UserList = __decorate([
         core_1.Component({
             selector: 'user-list',
-            templateUrl: 'app/user-list.component.html'
+            templateUrl: 'app/components/user-list.component.html'
         }), 
         __metadata('design:paramtypes', [user_service_1.UserService])
     ], UserList);

@@ -1,6 +1,7 @@
 package com.iotverify.service.impl;
 
 import com.iotverify.dao.UserDao;
+import com.iotverify.model.Device;
 import com.iotverify.model.User;
 import com.iotverify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,9 @@ public class UserServiceImpl implements UserService{
     public List<User> getUsers() {
         return userDao.findAll();
     }
+
+    public User findByUserId(Long userId) {
+        return userDao.findByUserId(userId);
+    }
+
 }

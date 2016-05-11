@@ -1,5 +1,6 @@
 package com.iotverify.service;
 
+import com.iotverify.model.Device;
 import com.iotverify.model.User;
 
 import java.util.List;
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface UserService {
     List<User> getUsers();
+
+    User findByUserId(Long userId);
 }

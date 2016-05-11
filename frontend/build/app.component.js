@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var user_list_component_1 = require('./user-list.component');
+var user_list_component_1 = require('./components/user-list.component');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var nav_bar_component_1 = require('./nav-bar.component');
-var tag_list_component_1 = require('./tag-list.component');
+var nav_bar_component_1 = require('./components/nav-bar.component');
+var tag_list_component_1 = require('./components/tag-list.component');
 var http_1 = require('@angular/http');
-var user_service_1 = require('./user.service');
+var user_service_1 = require('./services/user.service');
+var device_service_1 = require('./services/device.service');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -22,7 +23,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             directives: [user_list_component_1.UserList, nav_bar_component_1.NavBar, router_deprecated_1.ROUTER_DIRECTIVES, tag_list_component_1.TagList],
-            providers: [router_deprecated_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, user_service_1.UserService],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, user_service_1.UserService, device_service_1.DeviceService],
             template: "\n      <nav-bar></nav-bar>\n      <router-outlet></router-outlet>\n    "
         }),
         router_deprecated_1.RouteConfig([
