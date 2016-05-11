@@ -16,6 +16,8 @@ var tag_list_component_1 = require('./components/tag-list.component');
 var http_1 = require('@angular/http');
 var user_service_1 = require('./services/user.service');
 var device_service_1 = require('./services/device.service');
+var log_service_1 = require('./services/log.service');
+var log_list_component_1 = require('./components/log-list.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -23,12 +25,13 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             directives: [user_list_component_1.UserList, nav_bar_component_1.NavBar, router_deprecated_1.ROUTER_DIRECTIVES, tag_list_component_1.TagList],
-            providers: [router_deprecated_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, user_service_1.UserService, device_service_1.DeviceService],
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, user_service_1.UserService, device_service_1.DeviceService, log_service_1.LogService],
             template: "\n      <nav-bar></nav-bar>\n      <router-outlet></router-outlet>\n    "
         }),
         router_deprecated_1.RouteConfig([
             { path: '/user-list', name: 'UserList', component: user_list_component_1.UserList, useAsDefault: true },
-            { path: '/tag-list', name: 'TagList', component: tag_list_component_1.TagList }
+            { path: '/tag-list', name: 'TagList', component: tag_list_component_1.TagList },
+            { path: '/log-list', name: 'LogList', component: log_list_component_1.LogList },
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

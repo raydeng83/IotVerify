@@ -1,0 +1,28 @@
+<div class="container">
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th>Sr#</th>
+                <th>Log event Name</th>
+                <th>Log event Description</th>
+                <th>Username</th>
+                <th>Device</th>
+                <th>Tag ID</th>
+                <th>Creation Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logs">
+              <td>{{log.logEventId}}</td>
+                <td>{{log.eventName}}</td>
+                <td>{{log.eventDescription}}</td>
+                <td>{{log.userName}}</td>
+                <td>{{log.deviceUUID}}</td>
+                <td>{{log.tagId}}</td>
+                <td>{{log.creationDate}}</td>
+                <td><a style="cursor: pointer;">delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

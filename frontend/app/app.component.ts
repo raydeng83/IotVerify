@@ -6,11 +6,14 @@ import {TagList} from './components/tag-list.component'
 import { HTTP_PROVIDERS } from '@angular/http';
 import {UserService} from './services/user.service';
 import {DeviceService} from './services/device.service';
+import {LogService} from './services/log.service';
+import {LogList} from './components/log-list.component';
+
 
 @Component({
     selector: 'my-app',
     directives: [UserList, NavBar, ROUTER_DIRECTIVES, TagList],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService, DeviceService],
+    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService, DeviceService, LogService],
     template: `
       <nav-bar></nav-bar>
       <router-outlet></router-outlet>
@@ -19,6 +22,7 @@ import {DeviceService} from './services/device.service';
 
 @RouteConfig([
   {path: '/user-list', name: 'UserList', component: UserList, useAsDefault:true},
-  {path: '/tag-list', name: 'TagList', component: TagList}
+  {path: '/tag-list', name: 'TagList', component: TagList},
+  {path: '/log-list', name: 'LogList', component: LogList},
 ])
 export class AppComponent { }

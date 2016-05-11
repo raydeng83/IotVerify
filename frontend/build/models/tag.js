@@ -5,4 +5,4 @@ var Tag = (function () {
     return Tag;
 }());
 exports.Tag = Tag;
-//# sourceMappingURL=tag.js.map
+//# sourceMappingURL=Tag.js.map
