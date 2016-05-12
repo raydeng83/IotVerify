@@ -5,4 +5,5 @@ export class Tag {
   serialNo: string;
   deviceUdid: string;
   androidId: string;
+  deviceId: number;
 }

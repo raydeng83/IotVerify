@@ -49,6 +49,7 @@ var TagList = (function () {
                 tag.serialNo = devices[j].serialNo;
                 tag.deviceUdid = devices[j].deviceCompUdid;
                 tag.androidId = devices[j].androidId;
+                tag.deviceId = devices[j].deviceId;
                 _this.tags.push(tag);
             }
             ;
@@ -61,6 +62,22 @@ var TagList = (function () {
             console.log(user.userName);
             return user;
         }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
+    };
+    TagList.prototype.onDelete = function (tag) {
+        var _this = this;
+        this.deviceService.deleteDevice(tag.deviceId).subscribe(
+        // the first argument is a function which runs on success
+        function (data) {
+            for (var i = 0; i < _this.tags.length; i++) {
+                if (_this.tags[i].deviceId == tag.deviceId) {
+                    _this.tags.splice(i, 1);
+                }
+            }
+        }, 
+        // the second argument is a function which runs on error
+        function (err) { return console.error(err); }, 
+        // the third argument is a function which runs on completion
+        function () { return console.log('done loading'); });
     };
     TagList = __decorate([
         core_1.Component({

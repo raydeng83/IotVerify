@@ -19,7 +19,7 @@
                 <td>{{tag.serialNo}}</td>
                 <td>{{tag.deviceUdid}}</td>
                 <td>{{tag.androidId}}</td>
-                <td><a style="cursor: pointer;">delete</a></td>
+                <td><a style="cursor: pointer;" (click)="onDelete(tag)">delete</a></td>
             </tr>
         </tbody>
     </table>

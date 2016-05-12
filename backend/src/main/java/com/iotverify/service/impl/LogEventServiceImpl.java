@@ -28,4 +28,13 @@ public class LogEventServiceImpl implements LogEventService {
         logEventDao.deleteByUserId(userId);
     }
 
+
+    public LogEvent save (LogEvent logEvent) {
+        return logEventDao.save(logEvent);
+    }
+
+    public void delete (Long logEventId) {
+        logEventDao.delete(logEventId);
+    }
+
 }

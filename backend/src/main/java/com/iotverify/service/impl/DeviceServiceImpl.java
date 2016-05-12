@@ -33,4 +33,9 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDao.deleteByDeviceCompUdid(userId);
     }
 
+
+    public void delete (Long deviceId) {
+        deviceDao.delete(deviceId);
+    }
+
 }

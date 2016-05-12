@@ -13,6 +13,7 @@ var user_1 = require('../models/user');
 var user_service_1 = require('../services/user.service');
 var phoneNumber_1 = require('../models/phoneNumber');
 var phoneNumber_service_1 = require('../services/phoneNumber.service');
+var log_1 = require('../models/log');
 var AddUser = (function () {
     function AddUser(userService, PhoneNumberService) {
         this.userService = userService;
@@ -20,23 +21,27 @@ var AddUser = (function () {
         this.newUser = new user_1.User();
         this.newPhoneNumber1 = new phoneNumber_1.PhoneNumber();
         this.newPhoneNumber2 = new phoneNumber_1.PhoneNumber();
+        this.newLog = new log_1.Log();
+        this.currentDate = new Date();
         this.userAdded = false;
     }
     AddUser.prototype.onSubmit = function () {
         var _this = this;
-        this.newUser.creationDate = new Date();
+        this.newUser.creationDate = this.currentDate;
         this.newUser.tokenExpireTime = 60;
         this.newUser.type = 'normal';
         this.newPhoneNumber1.userId = this.newUser.userId;
-        this.newPhoneNumber1.creationDate = new Date();
+        this.newPhoneNumber1.creationDate = this.currentDate;
         this.newPhoneNumber1.userName = this.newUser.userName;
         this.newPhoneNumber2.userId = this.newUser.userId;
-        this.newPhoneNumber2.creationDate = new Date();
+        this.newPhoneNumber2.creationDate = this.currentDate;
         this.newPhoneNumber2.userName = this.newUser.userName;
         this.userService.addUser(this.newUser).subscribe(function (user) {
-            _this.PhoneNumberService.addPhoneNumber(_this.newPhoneNumber1).subscribe(function (user) { }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
-            _this.PhoneNumberService.addPhoneNumber(_this.newPhoneNumber2).subscribe(function (user) { }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
-            _this.userAdded = true;
+            _this.PhoneNumberService.addPhoneNumber(_this.newPhoneNumber1).subscribe(function (user) {
+                _this.PhoneNumberService.addPhoneNumber(_this.newPhoneNumber2).subscribe(function (user) {
+                    _this.userAdded = true;
+                }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
+            }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
         }, function (err) { return console.error(err); }, function () { return console.log('done loading'); });
     };
     AddUser = __decorate([

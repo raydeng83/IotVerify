@@ -23,7 +23,7 @@
                 <td>{{log.deviceUUID}}</td>
                 <td>{{log.tagId}}</td>
                 <td>{{log.creationDate}}</td>
-                <td><a style="cursor: pointer;">delete</a></td>
+                <td><a style="cursor: pointer;" (click)="onDelete(log)">delete</a></td>
             </tr>
         </tbody>
     </table>

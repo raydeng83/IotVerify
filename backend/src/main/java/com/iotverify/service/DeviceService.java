@@ -15,5 +15,6 @@ public interface DeviceService {
 
     void deleteByDeviceCompUdid(String userId);
 
+    void delete (Long deviceId);
 
 }

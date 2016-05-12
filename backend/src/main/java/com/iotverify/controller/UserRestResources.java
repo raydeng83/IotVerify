@@ -1,6 +1,7 @@
 package com.iotverify.controller;
 
 import com.iotverify.model.Device;
+import com.iotverify.model.LogEvent;
 import com.iotverify.model.User;
 import com.iotverify.service.DeviceService;
 import com.iotverify.service.LogEventService;
@@ -55,5 +56,6 @@ public class UserRestResources {
     public User addUser(@RequestBody User user) {
 
         return  userService.save(user);
+
     }
 }

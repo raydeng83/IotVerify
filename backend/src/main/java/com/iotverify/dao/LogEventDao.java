@@ -15,4 +15,8 @@ public interface LogEventDao extends CrudRepository<LogEvent, Long>{
     List<LogEvent> findAll();
 
     void deleteByUserId (Long userId);
+
+    LogEvent save (LogEvent logEvent);
+
+    void delete (Long logEventId);
 }

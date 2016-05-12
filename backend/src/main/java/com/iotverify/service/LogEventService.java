@@ -12,4 +12,7 @@ public interface LogEventService {
 
     void deleteByUserId (Long userId);
 
+    LogEvent save (LogEvent logEvent);
+
+    void delete (Long logEventId);
 }

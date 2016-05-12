@@ -15,8 +15,8 @@ export class TagList {
     public tags: Tag[];
 
     constructor(private userService: UserService, private deviceService: DeviceService) {
-        this.tags=[];
-        this.devices=[];
+        this.tags = [];
+        this.devices = [];
         this.getUsers();
     }
 
@@ -25,8 +25,8 @@ export class TagList {
             // the first argument is a function which runs on success
             users => {
                 this.users = users;
-                for (let i=0; i < this.users.length; i++) {
-                  this.getDevices(this.users[i].userId, i);
+                for (let i = 0; i < this.users.length; i++) {
+                    this.getDevices(this.users[i].userId, i);
                 }
             },
             // the second argument is a function which runs on error
@@ -36,21 +36,22 @@ export class TagList {
         );
     }
 
-    getDevices(userId:number, i: number) {
+    getDevices(userId: number, i: number) {
         this.deviceService.findDevicesByUserId(userId).subscribe(
             // the first argument is a function which runs on success
             devices => {
-              for (let j=0;j<devices.length; j++) {
-                this.devices.push(devices[j]);
-                let tag = new Tag();
-                tag.userName=this.users[i].userName;
-                tag.tagId=devices[j].tagId;
-                tag.deviceName=devices[j].deviceName;
-                tag.serialNo=devices[j].serialNo;
-                tag.deviceUdid=devices[j].deviceCompUdid;
-                tag.androidId=devices[j].androidId;
-                this.tags.push(tag);
-              };
+                for (let j = 0; j < devices.length; j++) {
+                    this.devices.push(devices[j]);
+                    let tag = new Tag();
+                    tag.userName = this.users[i].userName;
+                    tag.tagId = devices[j].tagId;
+                    tag.deviceName = devices[j].deviceName;
+                    tag.serialNo = devices[j].serialNo;
+                    tag.deviceUdid = devices[j].deviceCompUdid;
+                    tag.androidId = devices[j].androidId;
+                    tag.deviceId = devices[j].deviceId;
+                    this.tags.push(tag);
+                };
             },
             // the second argument is a function which runs on error
             err => console.error(err)
@@ -58,14 +59,31 @@ export class TagList {
     }
 
     getUserByUserId(userId: number) {
-      this.userService.getUserByUserId(userId).subscribe(
-        user => {
-          console.log(user.userName);
-          return user;
-        },
-        err => console.error(err),
-        () => console.log('done loading')
-      )
+        this.userService.getUserByUserId(userId).subscribe(
+            user => {
+                console.log(user.userName);
+                return user;
+            },
+            err => console.error(err),
+            () => console.log('done loading')
+        )
+    }
+
+    onDelete(tag: Tag) {
+        this.deviceService.deleteDevice(tag.deviceId).subscribe(
+            // the first argument is a function which runs on success
+            data => {
+                for (let i = 0; i < this.tags.length; i++) {
+                    if (this.tags[i].deviceId == tag.deviceId) {
+                        this.tags.splice(i, 1);
+                    }
+                }
+            },
+            // the second argument is a function which runs on error
+            err => console.error(err),
+            // the third argument is a function which runs on completion
+            () => console.log('done loading')
+        );
     }
 
 

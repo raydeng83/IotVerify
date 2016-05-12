@@ -3,10 +3,7 @@ package com.iotverify.controller;
 import com.iotverify.model.Device;
 import com.iotverify.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,13 @@ public class DeviceRestResources {
     @RequestMapping("/allDevices")
     public List<Device> findAllDevices() {
         return deviceService.findAll();
+    }
+
+    @RequestMapping(value="/delete/{deviceId}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable(value = "deviceId") String deviceId) {
+
+        deviceService.delete(Long.parseLong(deviceId));
+
+        return "delete device success.";
     }
 }

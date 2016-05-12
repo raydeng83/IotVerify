@@ -13,6 +13,9 @@ export class DeviceService {
 
   findAllDevices(){
     return this.http.get('http://localhost:8080/rest/device/allDevices').map((res:Response) => res.json());
+  }
 
+  deleteDevice(deviceId: number) {
+    return this.http.delete('http://localhost:8080/rest/device/delete/'+deviceId).map((res:Response) => res);
   }
 }

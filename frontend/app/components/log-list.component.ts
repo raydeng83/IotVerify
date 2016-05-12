@@ -49,4 +49,15 @@ export class LogList {
         () => console.log('done loading')
     );
   }
+
+  onDelete (log: Log) {
+    this.logService.delete(log).subscribe(
+      // the first argument is a function which runs on success
+      data => {this.getLogs();},
+      // the second argument is a function which runs on error
+      err => console.error(err),
+      // the third argument is a function which runs on completion
+      () => console.log('done loading')
+    );
+  }
 }

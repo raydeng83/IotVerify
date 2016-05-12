@@ -50,6 +50,16 @@ var LogList = (function () {
         // the third argument is a function which runs on completion
         function () { return console.log('done loading'); });
     };
+    LogList.prototype.onDelete = function (log) {
+        var _this = this;
+        this.logService.delete(log).subscribe(
+        // the first argument is a function which runs on success
+        function (data) { _this.getLogs(); }, 
+        // the second argument is a function which runs on error
+        function (err) { return console.error(err); }, 
+        // the third argument is a function which runs on completion
+        function () { return console.log('done loading'); });
+    };
     LogList = __decorate([
         core_1.Component({
             selector: 'log',

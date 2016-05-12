@@ -20,6 +20,9 @@ var DeviceService = (function () {
     DeviceService.prototype.findAllDevices = function () {
         return this.http.get('http://localhost:8080/rest/device/allDevices').map(function (res) { return res.json(); });
     };
+    DeviceService.prototype.deleteDevice = function (deviceId) {
+        return this.http.delete('http://localhost:8080/rest/device/delete/' + deviceId).map(function (res) { return res; });
+    };
     DeviceService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

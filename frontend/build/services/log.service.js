@@ -17,6 +17,13 @@ var LogService = (function () {
     LogService.prototype.getLogs = function () {
         return this.http.get('http://localhost:8080/rest/log/allLogs').map(function (res) { return res.json(); });
     };
+    LogService.prototype.addLog = function (log) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('http://localhost:8080/rest/log/add/', JSON.stringify(log), { headers: headers }).map(function (res) { return res; });
+    };
+    LogService.prototype.delete = function (log) {
+        return this.http.delete('http://localhost:8080/rest/log/delete/' + log.logEventId).map(function (res) { return res; });
+    };
     LogService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
