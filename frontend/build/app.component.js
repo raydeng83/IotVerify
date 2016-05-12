@@ -18,6 +18,7 @@ var user_service_1 = require('./services/user.service');
 var device_service_1 = require('./services/device.service');
 var log_service_1 = require('./services/log.service');
 var log_list_component_1 = require('./components/log-list.component');
+var add_user_component_1 = require('./components/add-user.component');
 var AppComponent = (function () {
     function AppComponent() {
     }
@@ -32,6 +33,7 @@ var AppComponent = (function () {
             { path: '/user-list', name: 'UserList', component: user_list_component_1.UserList, useAsDefault: true },
             { path: '/tag-list', name: 'TagList', component: tag_list_component_1.TagList },
             { path: '/log-list', name: 'LogList', component: log_list_component_1.LogList },
+            { path: '/add-user', name: 'AddUser', component: add_user_component_1.AddUser },
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

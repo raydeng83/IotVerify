@@ -1,0 +1,45 @@
+<div class="container">
+    <form class="ui form" (ngSubmit)="onSubmit()" #addUserForm="ngForm">
+        <h2 class="ui dividing header">Add User</h2>
+        <br>
+        <div class="field">
+            <div class="two fields">
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" name="fullName" placeholder="Full Name" [(ngModel)]="newUser.fullName" ngControl="fullName" required>
+                </div>
+                <div class="field">
+                    <label>User Name</label>
+                    <input type="text" name="userName" placeholder="User Name" [(ngModel)]="newUser.userName" ngControl="userName" required>
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="field">
+                  <label>Password</label>
+                    <input type="password" name="password" placeholder="Password" [(ngModel)]="newUser.password" ngControl="password" required>
+                </div>
+                <div class="field">
+                  <label>UID</label>
+                    <input type="text" name="UID" placeholder="UID" [(ngModel)]="newUser.UID" ngControl="UID" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="two fields">
+                <div class="field">
+                  <label>Phone Number 1</label>
+                    <input type="text" name="phoneNumber1" placeholder="Your First Phone Number " [(ngModel)]="newPhoneNumber1.phone" ngControl="phoneNumber1" required>
+                </div>
+                <div class="field">
+                    <label>Phone Number 2</label>
+                    <input type="text" name="phoneNumber2" placeholder="Your Second Phone Number " [(ngModel)]="newPhoneNumber2.phone" ngControl="phoneNumber2" required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="ui button" [disabled]="!addUserForm.form.valid">Register</button>
+    </form>
+
+
+</div>

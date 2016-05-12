@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user';
 
@@ -18,5 +18,10 @@ export class UserService {
 
   deleteUser(userId: number) {
     return this.http.delete('http://localhost:8080/rest/user/delete/'+userId).map((res:Response) => res);
+  }
+
+  addUser(user: User) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.post('http://localhost:8080/rest/user/add/', JSON.stringify(user), {headers: headers}).map((res:Response) => res);
   }
 }

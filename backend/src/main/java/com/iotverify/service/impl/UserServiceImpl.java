@@ -32,5 +32,8 @@ public class UserServiceImpl implements UserService{
         userDao.delete(userId);
     }
 
+    public User save (User user) {
+        return userDao.save(user);
+    }
 
 }

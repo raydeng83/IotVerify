@@ -23,6 +23,10 @@ var UserService = (function () {
     UserService.prototype.deleteUser = function (userId) {
         return this.http.delete('http://localhost:8080/rest/user/delete/' + userId).map(function (res) { return res; });
     };
+    UserService.prototype.addUser = function (user) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('http://localhost:8080/rest/user/add/', JSON.stringify(user), { headers: headers }).map(function (res) { return res; });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

@@ -46,4 +46,8 @@ public class UserRestResources {
         return "delete success.";
     }
 
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+    public User addUser(@RequestBody User user) {
+        return userService.save(user);
+    }
 }

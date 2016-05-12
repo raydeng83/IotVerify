@@ -8,7 +8,7 @@ import {UserService} from './services/user.service';
 import {DeviceService} from './services/device.service';
 import {LogService} from './services/log.service';
 import {LogList} from './components/log-list.component';
-
+import {AddUser} from './components/add-user.component';
 
 @Component({
     selector: 'my-app',
@@ -24,5 +24,6 @@ import {LogList} from './components/log-list.component';
   {path: '/user-list', name: 'UserList', component: UserList, useAsDefault:true},
   {path: '/tag-list', name: 'TagList', component: TagList},
   {path: '/log-list', name: 'LogList', component: LogList},
+  {path: '/add-user', name: 'AddUser', component: AddUser},
 ])
 export class AppComponent { }
