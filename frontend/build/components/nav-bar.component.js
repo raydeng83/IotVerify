@@ -12,7 +12,16 @@ var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var NavBar = (function () {
     function NavBar() {
+        this.show = false;
     }
+    NavBar.prototype.imageShow = function () {
+        if (this.show == true) {
+            this.show = false;
+        }
+        else {
+            this.show = true;
+        }
+    };
     NavBar = __decorate([
         core_1.Component({
             selector: 'nav-bar',

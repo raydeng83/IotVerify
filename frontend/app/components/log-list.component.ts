@@ -1,3 +1,6 @@
+//<reference path="../../typings/jquery/jquery.d.ts" />
+//<reference path="../../node_modules/retyped-jqueryui-tsd-ambient/jqueryui.d.ts" />
+
 import {Component} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {DeviceService} from '../services/device.service';
@@ -10,7 +13,7 @@ import {LogService} from '../services/log.service';
   selector: 'log',
   templateUrl: '/app/components/log-list.component.html'
 })
-export class LogList {
+export class LogList{
   public users: User[];
   public devices: Device[];
   public logs: Log[];
@@ -60,4 +63,6 @@ export class LogList {
       () => console.log('done loading')
     );
   }
+
+
 }

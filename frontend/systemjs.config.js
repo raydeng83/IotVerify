@@ -5,7 +5,9 @@
     'app':                        'build', // 'dist',
     'rxjs':                       'node_modules/rxjs',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    '@angular':                   'node_modules/@angular'
+    '@angular':                   'node_modules/@angular',
+    'ng2-bs3-modal':              'node_modules/ng2-bs3-modal'
+
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
@@ -28,7 +30,7 @@
     '@angular/upgrade'
   ];
 
-  
+
   // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
   packageNames.forEach(function(pkgName) {
     packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };

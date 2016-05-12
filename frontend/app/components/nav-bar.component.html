@@ -1,6 +1,6 @@
 <div class="ui inverted fixed menu">
   <div class="ui secondary pointing menu ">
-    <a class="item" >
+    <a class="item" (click)="imageShow()">
       <img src="resources/images/vault-icon.png" />
     </a>
     <a class="item" [routerLink]="['UserList']">
@@ -18,4 +18,7 @@
       Add User
     </a>
   </div>
+</div>
+<div *ngIf="show" style="margin-top:70px; margin-bottom: -355px;">
+<img src="resources/images/VaultBoy.png" class="ui image medium centered" />
 </div>

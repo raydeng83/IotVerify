@@ -9,5 +9,13 @@ import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
   styleUrls:['app/components/nav-bar.component.css']
 })
 export class NavBar {
+  private show:boolean =false;
 
+  imageShow() {
+    if (this.show==true) {
+      this.show=false;
+    } else {
+      this.show=true;
+    }
+  }
 }
