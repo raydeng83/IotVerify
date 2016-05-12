@@ -28,7 +28,7 @@ var AppComponent = (function () {
             selector: 'my-app',
             directives: [user_list_component_1.UserList, nav_bar_component_1.NavBar, router_deprecated_1.ROUTER_DIRECTIVES, tag_list_component_1.TagList],
             providers: [router_deprecated_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS, user_service_1.UserService, device_service_1.DeviceService, log_service_1.LogService, phoneNumber_service_1.PhoneNumberService],
-            template: "\n      <nav-bar></nav-bar>\n      <router-outlet></router-outlet>\n    "
+            template: "\n    <img src=\"resources/images/IotVerify-logo.png\" class=\"ui image medium centered\" />\n    <hr>\n      <nav-bar></nav-bar>\n      <router-outlet></router-outlet>\n    "
         }),
         router_deprecated_1.RouteConfig([
             { path: '/user-list', name: 'UserList', component: user_list_component_1.UserList, useAsDefault: true },

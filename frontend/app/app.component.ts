@@ -16,15 +16,17 @@ import {PhoneNumberService} from './services/phoneNumber.service';
     directives: [UserList, NavBar, ROUTER_DIRECTIVES, TagList],
     providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService, DeviceService, LogService, PhoneNumberService],
     template: `
+    <img src="resources/images/IotVerify-logo.png" class="ui image medium centered" />
+    <hr>
       <nav-bar></nav-bar>
       <router-outlet></router-outlet>
     `
 })
 
 @RouteConfig([
-  {path: '/user-list', name: 'UserList', component: UserList, useAsDefault:true},
-  {path: '/tag-list', name: 'TagList', component: TagList},
-  {path: '/log-list', name: 'LogList', component: LogList},
-  {path: '/add-user', name: 'AddUser', component: AddUser},
+    { path: '/user-list', name: 'UserList', component: UserList, useAsDefault: true },
+    { path: '/tag-list', name: 'TagList', component: TagList },
+    { path: '/log-list', name: 'LogList', component: LogList },
+    { path: '/add-user', name: 'AddUser', component: AddUser },
 ])
 export class AppComponent { }
