@@ -17,6 +17,6 @@ export class UserService {
   }
 
   deleteUser(userId: number) {
-    return this.http.delete('http://localhost:8080/rest/user/delete/'+userId).map((res:Response) => res.json());
+    return this.http.delete('http://localhost:8080/rest/user/delete/'+userId).map((res:Response) => res);
   }
 }

@@ -29,7 +29,7 @@ var UserList = (function () {
         var _this = this;
         this.userService.deleteUser(userId).subscribe(
         // the first argument is a function which runs on success
-        function (data) { return _this.getUsers(); }, 
+        function (data) { _this.getUsers(); }, 
         // the second argument is a function which runs on error
         function (err) { return console.error(err); }, 
         // the third argument is a function which runs on completion

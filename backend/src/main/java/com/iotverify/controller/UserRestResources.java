@@ -38,10 +38,12 @@ public class UserRestResources {
 
 
     @RequestMapping(value="/delete/{userId}", method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable(value = "userId") String userId) {
+    public String deleteUser(@PathVariable(value = "userId") String userId) {
         deviceService.deleteByDeviceCompUdid(userId);
         logEventService.deleteByUserId(Long.parseLong(userId));
         userService.delete(Long.parseLong(userId));
+
+        return "delete success.";
     }
 
 }
