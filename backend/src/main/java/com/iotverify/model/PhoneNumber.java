@@ -20,6 +20,9 @@ public class PhoneNumber {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    @Transient
+    private String userName;
+
     public Long getPhoneNumberId() {
         return phoneNumberId;
     }
@@ -50,5 +53,13 @@ public class PhoneNumber {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

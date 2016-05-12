@@ -4,6 +4,7 @@ import com.iotverify.model.Device;
 import com.iotverify.model.User;
 import com.iotverify.service.DeviceService;
 import com.iotverify.service.LogEventService;
+import com.iotverify.service.PhoneNumberService;
 import com.iotverify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class UserRestResources {
     @Autowired
     private LogEventService logEventService;
 
+    @Autowired
+    private PhoneNumberService phoneNumberService;
+
     @RequestMapping("/users")
     public List<User> getUsers() {
         return userService.getUsers();
@@ -41,6 +45,7 @@ public class UserRestResources {
     public String deleteUser(@PathVariable(value = "userId") String userId) {
         deviceService.deleteByDeviceCompUdid(userId);
         logEventService.deleteByUserId(Long.parseLong(userId));
+        phoneNumberService.deleteByUserId(Long.parseLong(userId));
         userService.delete(Long.parseLong(userId));
 
         return "delete success.";
@@ -48,6 +53,7 @@ public class UserRestResources {
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public User addUser(@RequestBody User user) {
-        return userService.save(user);
+
+        return  userService.save(user);
     }
 }

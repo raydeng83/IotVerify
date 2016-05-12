@@ -9,11 +9,12 @@ import {DeviceService} from './services/device.service';
 import {LogService} from './services/log.service';
 import {LogList} from './components/log-list.component';
 import {AddUser} from './components/add-user.component';
+import {PhoneNumberService} from './services/phoneNumber.service';
 
 @Component({
     selector: 'my-app',
     directives: [UserList, NavBar, ROUTER_DIRECTIVES, TagList],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService, DeviceService, LogService],
+    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService, DeviceService, LogService, PhoneNumberService],
     template: `
       <nav-bar></nav-bar>
       <router-outlet></router-outlet>
