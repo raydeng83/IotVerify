@@ -20,4 +20,6 @@ public interface DeviceDao extends CrudRepository<Device, Long>{
     void deleteByDeviceCompUdid(String userId);
 
     void delete (Long deviceId);
+
+    List<Device> findByTagId (Long tagId);
 }

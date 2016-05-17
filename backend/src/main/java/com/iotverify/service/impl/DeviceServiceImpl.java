@@ -38,4 +38,7 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDao.delete(deviceId);
     }
 
+    public List<Device> findByTagId (Long tagId) {
+        return deviceDao.findByTagId(tagId);
+    }
 }

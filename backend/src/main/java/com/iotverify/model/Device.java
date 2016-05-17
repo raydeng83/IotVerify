@@ -14,10 +14,10 @@ public class Device {
     private Long deviceId;
     @Column(name = "device_UUID")
     private String deviceUUID;
-    @Column(name = "user_id")
+    @Column(name = "device_comp_udid")
     private String deviceCompUdid;
     @Column(name = "tag_ID")
-    private String tagId;
+    private Long tagId;
     @Column(name = "android_id")
     private String androidId;
     @Column(name = "device_name")
@@ -28,6 +28,8 @@ public class Device {
     private String wifiMacAddress;
     @Column(name = "serial_no")
     private String serialNo;
+    @Column(name="user_id")
+    private Long userId;
 
     public Long getDeviceId() {
         return deviceId;
@@ -35,14 +37,6 @@ public class Device {
 
     public void setDeviceId(Long deviceId) {
         this.deviceId = deviceId;
-    }
-
-    public String getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(String tagId) {
-        this.tagId = tagId;
     }
 
     public String getDeviceUUID() {
@@ -99,5 +93,17 @@ public class Device {
 
     public void setDeviceCompUdid(String deviceCompUdid) {
         this.deviceCompUdid = deviceCompUdid;
+    }
+
+    public void setTagId(Long tagId) {
+        this.tagId = tagId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -17,4 +17,6 @@ public interface DeviceService {
 
     void delete (Long deviceId);
 
+    List<Device> findByTagId (Long tagId);
+
 }
