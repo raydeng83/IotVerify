@@ -1,7 +1,7 @@
 package com.iotverify.controller;
 
-import com.iotverify.model.PhoneNumber;
-import com.iotverify.service.PhoneNumberService;
+import com.iotverify.model.Phone;
+import com.iotverify.service.PhoneService;
 import com.iotverify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 public class PhoneNumberRestResources {
 
     @Autowired
-    private PhoneNumberService phoneNumberService;
+    private PhoneService phoneService;
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public PhoneNumber addPhoneNumber(@RequestBody PhoneNumber phoneNumber) {
+    public Phone addPhoneNumber(@RequestBody Phone phone) {
 
-        phoneNumber.setUserId(userService.findByUserName(phoneNumber.getUserName()).getUserId());
-        return phoneNumberService.save(phoneNumber);
+        phone.setUserId(userService.findByUserName(phone.getUserName()).getUserId());
+        return phoneService.save(phone);
     }
 }

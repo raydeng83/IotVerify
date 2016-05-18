@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="phone_numbers")
-public class PhoneNumber {
+public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
