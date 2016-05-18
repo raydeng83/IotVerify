@@ -40,7 +40,7 @@ public class ApiController {
     private PhoneNumberService phoneNumberService;
 
     @RequestMapping(value = "/tagIdentification", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
-    public void tagIdentify(HttpServletRequest req, HttpServletResponse res, @RequestBody
+    public Map<String, Object> tagIdentify(HttpServletRequest req, HttpServletResponse res, @RequestBody
     MultiValueMap<String,
             String>
             parametersMultiMap) throws Exception{
@@ -71,13 +71,39 @@ public class ApiController {
             User user = userService.findByUserId(userId);
             String username=user.getUserName();
 
-            if (devices.get(0).getDeviceCompUdid()!="") {
-                Map<String, Object> map = new HashMap<>();
-                map.put("status", true);
-                map.put("username", username);
+            if (devices.get(0).getTagId()!= null) {
+
+                if (devices.get(0).getDeviceCompUdid() != "") {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("status", true);
+                    map.put("username", username);
+
+                    return map;
+                } else {
+                    List<PhoneNumber> phoneNumbers = phoneNumberService.findByUserId(userId);
+
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("username", username);
+                    map.put("phones", phoneNumbers);
+                    map.put("status", false);
+                    map.put("error", "Please register for signing in from a new device.");
+
+                    return map;
+                }
             } else {
-                List<PhoneNumber> phoneNumbers = phoneNumberService.findByUserId(userId);
+                Map<String, Object> map = new HashMap<>();
+                map.put("status", false);
+                map.put("error", "Please register this tag.");
+
+                return map;
             }
+
+        } else {
+            Map<String, Object> map = new HashMap<>();
+            map.put("status", false);
+            map.put("error", "Invalid request from the application.");
+
+            return map;
         }
 
     }

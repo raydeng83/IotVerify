@@ -95,6 +95,10 @@ public class Device {
         this.deviceCompUdid = deviceCompUdid;
     }
 
+    public Long getTagId() {
+        return tagId;
+    }
+
     public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
