@@ -19,4 +19,7 @@ public interface UserService {
 
     User save (User user);
 
+    User findByTokenId (Long tokenId);
+
+
 }

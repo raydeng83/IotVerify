@@ -40,5 +40,8 @@ public class UserServiceImpl implements UserService{
         return userDao.findByUserName(userName);
     }
 
+    public User findByTokenId (Long tokenId) {
+        return userDao.findByTokenId(tokenId);
+    }
 
 }

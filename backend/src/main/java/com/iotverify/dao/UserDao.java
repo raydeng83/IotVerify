@@ -21,4 +21,6 @@ public interface UserDao extends CrudRepository<User, Long> {
     void delete(Long userId);
 
     User save (User user);
+
+    User findByTokenId (Long tokenId);
 }

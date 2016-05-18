@@ -273,4 +273,63 @@ public class ApiController {
 
     }
 
+    @RequestMapping(value = "/tokenVerification", method = RequestMethod.POST, consumes =
+            {"application/x-www-form-urlencoded"})
+    public Map<String, Object> tokenVerification(@RequestBody MultiValueMap<String, String> parametersMultiMap) throws
+            Exception {
+
+        Map<String, Object> map = new HashMap<>();
+
+        Map<String, String> formParameters = parametersMultiMap.toSingleValueMap();
+
+        if (!(formParameters.get("tag_id") == null) && !formParameters.get("device_variables").isEmpty() &&
+                !(formParameters.get("device_variables") == null) && !(formParameters.get("token") == null)) {
+
+            String tagId = formParameters.get("tag_id");
+            String tokenNumber = formParameters.get("token");
+            JsonParser parser = new JsonParser();
+            JsonObject deviceVarObj = (JsonObject) parser.parse(formParameters.get("device_variables"));
+
+            //define device fields
+            String androidId = deviceVarObj.get("android_id").toString();
+            String imei = deviceVarObj.get("imei").toString();
+            String deviceName = deviceVarObj.get("device_name").toString();
+            String serialNo = deviceVarObj.get("serial_no").toString();
+            String wifiMacAddress = deviceVarObj.get("wifi_mac_address").toString();
+
+            User user = userService.findByTokenId(Long.parseLong(tokenNumber));
+
+            if (user != null) {
+                map.put("status", true);
+                map.put("username", user.getUserName());
+
+                return map;
+            } else {
+                map.put("status", false);
+                map.put("error", "You have passed the wrong token number.");
+
+                return map;
+            }
+
+        } else {
+            map.put("status", false);
+            map.put("error", "Invalid request from the application.");
+
+            return map;
+        }
+
+    }
+
+
+    @RequestMapping(value = "/userAuthentication", method = RequestMethod.POST, consumes =
+            {"application/x-www-form-urlencoded"})
+    public Map<String, Object> userAuthentication(@RequestBody MultiValueMap<String, String> parametersMultiMap) throws
+            Exception {
+
+        Map<String, Object> map = new HashMap<>();
+
+        Map<String, String> formParameters = parametersMultiMap.toSingleValueMap();
+
+    }
+
 }
