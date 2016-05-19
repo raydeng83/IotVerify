@@ -1,5 +1,6 @@
 package com.iotverify.controller.api;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.iotverify.model.Device;
@@ -16,6 +17,7 @@ import com.twilio.sdk.creator.api.v2010.account.MessageCreator;
 import com.twilio.sdk.resource.api.v2010.account.Call;
 import com.twilio.sdk.resource.api.v2010.account.Message;
 import com.twilio.sdk.type.PhoneNumber;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.bind.DatatypeConverter;
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -164,12 +167,29 @@ public class ApiController {
                 map.put("status", true);
                 map.put("phones", user.getUserName());
                 List<Phone> phones = phoneService.findByUserId(user.getUserId());
-                for (Phone phone : phones) {
-                    String tempPhone = phone.getPhone();
+
+                String[] phoneIds = new String[2];
+                String[] phoneNumbers = new String[2];
+                for (int i=0; i<phones.size();i++) {
+                    String tempPhone = phones.get(i).getPhone();
                     tempPhone = "XXX-XXX-" + tempPhone.substring(tempPhone.length() - 4);
-                    phone.setPhone(tempPhone);
+                    phones.get(i).setPhone(tempPhone);
+                    phoneIds[i]=phones.get(i).getPhoneId()+"";
+                    phoneNumbers[i]=tempPhone;
                 }
-                map.put("phones", phones);
+
+                JSONObject phone1 = new JSONObject();
+                JSONObject phone2 = new JSONObject();
+                phone1.put("phone_id", phoneIds[0]);
+                phone1.put("phone_number", phoneNumbers[0]);
+                phone2.put("phone_id", phoneIds[1]);
+                phone2.put("phone_number", phoneNumbers[1]);
+                Object[] phoneObjects={phone1, phone2};
+
+                map.put("phones", phoneObjects);
+                map.put("status", true);
+
+
 
                 return map;
 
@@ -204,7 +224,7 @@ public class ApiController {
 
             String tagId = formParameters.get("tag_id");
             String userName = formParameters.get("username");
-            String phoneNumberId = formParameters.get("phone_id");
+            String phoneId = formParameters.get("phone_id");
             String action = formParameters.get("action");
             JsonParser parser = new JsonParser();
             JsonObject deviceVarObj = (JsonObject) parser.parse(formParameters.get("device_variables"));
@@ -223,7 +243,7 @@ public class ApiController {
 
             List<Device> devices = deviceService.findByTagId(Long.parseLong(tagId));
 
-            Phone phone = phoneService.findOne(Long.parseLong(phoneNumberId));
+            Phone phone = phoneService.findOne(Long.parseLong(phoneId));
             String phoneNumber = phone.getPhone();
 
             Long tokenId = 100000 + (long) (Math.random() * ((999999 - 100000) + 1));
@@ -434,7 +454,7 @@ public class ApiController {
                 Device device = new Device();
                 device.setUserId(userId);
                 device.setTagId(Long.parseLong(tagId));
-                device.setDeviceId(Long.parseLong(deviceId));
+                device.setDeviceUUID(deviceId);
                 device.setAndroidId(androidId);
                 device.setImei(imei);
                 device.setDeviceName(deviceName);

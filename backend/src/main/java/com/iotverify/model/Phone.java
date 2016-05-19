@@ -12,7 +12,7 @@ public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long phoneNumberId;
+    private Long phoneId;
     @Column(name = "user_id")
     private Long userId;
     @Column(name = "phone")
@@ -23,12 +23,12 @@ public class Phone {
     @Transient
     private String userName;
 
-    public Long getPhoneNumberId() {
-        return phoneNumberId;
+    public Long getPhoneId() {
+        return phoneId;
     }
 
-    public void setPhoneNumberId(Long phoneNumberId) {
-        this.phoneNumberId = phoneNumberId;
+    public void setPhoneId(Long phoneId) {
+        this.phoneId = phoneId;
     }
 
     public Long getUserId() {
