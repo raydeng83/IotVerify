@@ -7,6 +7,6 @@ export class User {
   creationDate: Date;
   tokenId: number;
   tokenExpireTime: number;
-  UID: string;
+  uid: string;
   tempToken: string;
 }

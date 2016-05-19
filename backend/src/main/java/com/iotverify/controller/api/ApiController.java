@@ -78,30 +78,36 @@ public class ApiController {
 
             List<Device> devices = deviceService.findByTagId(Long.parseLong(tagId));
 
-//            if (devices.size() > 0) {
-            Long userId = devices.get(0).getUserId();
-            User user = userService.findByUserId(userId);
-            String username = user.getUserName();
+            if (devices.size() > 0) {
+                Long userId = devices.get(0).getUserId();
+                User user = userService.findByUserId(userId);
+                String username = user.getUserName();
 
-            if (devices.get(0).getTagId() != null) {
+                if (devices.get(0).getTagId() != null) {
 
-                if (devices.get(0).getDeviceCompUdid() != "") {
-                    map.put("status", true);
-                    map.put("username", username);
+                    if (devices.get(0).getDeviceCompUdid() != "") {
+                        map.put("status", true);
+                        map.put("username", username);
 
-                    return map;
-                } else {
-                    List<Phone> phones = phoneService.findByUserId(userId);
+                        return map;
+                    } else {
+                        List<Phone> phones = phoneService.findByUserId(userId);
 
-                    map.put("username", username);
-                    map.put("phones", phones);
-                    for (Phone phone : phones) {
-                        String tempPhone = phone.getPhone();
-                        tempPhone = "XXX-XXX-" + tempPhone.substring(tempPhone.length() - 4);
-                        phone.setPhone(tempPhone);
+                        map.put("username", username);
+                        map.put("phones", phones);
+                        for (Phone phone : phones) {
+                            String tempPhone = phone.getPhone();
+                            tempPhone = "XXX-XXX-" + tempPhone.substring(tempPhone.length() - 4);
+                            phone.setPhone(tempPhone);
+                        }
+                        map.put("status", false);
+                        map.put("error", "Please register for signing in from a new device.");
+
+                        return map;
                     }
+                } else {
                     map.put("status", false);
-                    map.put("error", "Please register for signing in from a new device.");
+                    map.put("error", "Please register this tag.");
 
                     return map;
                 }
@@ -111,7 +117,6 @@ public class ApiController {
 
                 return map;
             }
-//            }
 
         } else {
             map.put("status", false);
@@ -220,7 +225,7 @@ public class ApiController {
             Phone phone = phoneService.findOne(Long.parseLong(phoneNumberId));
             String phoneNumber = phone.getPhone();
 
-            Long tokenId =100000 + (long) (Math.random() * ((999999-100000)+1));
+            Long tokenId = 100000 + (long) (Math.random() * ((999999 - 100000) + 1));
 
             User user = userService.findByUserName(userName);
             user.setTokenId(tokenId);
@@ -237,7 +242,7 @@ public class ApiController {
                         ACCOUNT_SID,
                         new PhoneNumber(phoneNumber), // TO number
                         new PhoneNumber("+15622739886"), // From Twilio number
-                        "Your registration code is:"+tokenId
+                        "Your registration code is:" + tokenId
                 ).execute();
 
                 System.out.println(message.getSid());
@@ -251,7 +256,7 @@ public class ApiController {
                         new PhoneNumber("+15622739886"), // From Twilio number
                         // Read TwiML at this URL when a call connects (hold music)
                         new URI("http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient")
-                        ).execute();
+                ).execute();
 
                 System.out.println(call.getSid());
 
@@ -336,7 +341,7 @@ public class ApiController {
 
         if (!(formParameters.get("tag_id") == null) && !formParameters.get("device_variables").isEmpty() &&
                 !(formParameters.get("device_variables") == null) && !(formParameters.get("username") == null &&
-                !(formParameters.get("password") == null ))) {
+                !(formParameters.get("password") == null))) {
 
             String tagId = formParameters.get("tag_id");
             String username = formParameters.get("username");
@@ -360,7 +365,7 @@ public class ApiController {
             m.update(deviceUdid.getBytes(), 0, deviceUdid.length());
             String deviceCompUdid = new BigInteger(1, m.digest()).toString(16);
 
-            if (checkUserAuthentication(username,password)) {
+            if (checkUserAuthentication(username, password)) {
                 User user = userService.findByUserName(username);
                 String tempToken = UUID.randomUUID().toString();
                 user.setTempToken(tempToken);
@@ -398,7 +403,7 @@ public class ApiController {
 
 
         if (!(formParameters.get("tag_id") == null) && !formParameters.get("device_variables").isEmpty() &&
-                !(formParameters.get("device_variables") == null) && !(formParameters.get("username") == null )) {
+                !(formParameters.get("device_variables") == null) && !(formParameters.get("username") == null)) {
 
             String tagId = formParameters.get("tag_id");
             String username = formParameters.get("username");
@@ -439,7 +444,6 @@ public class ApiController {
                 deviceService.save(device);
 
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -472,7 +476,7 @@ public class ApiController {
 
     }
 
-    boolean checkUserAuthentication (String username, String password) {
+    boolean checkUserAuthentication(String username, String password) {
         User user = userService.findByUserName(username);
 
         if (user.getPassword().equals(password)) {
