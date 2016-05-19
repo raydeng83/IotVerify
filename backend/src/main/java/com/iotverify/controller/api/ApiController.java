@@ -3,9 +3,11 @@ package com.iotverify.controller.api;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.iotverify.model.Device;
+import com.iotverify.model.LogEvent;
 import com.iotverify.model.Phone;
 import com.iotverify.model.User;
 import com.iotverify.service.DeviceService;
+import com.iotverify.service.LogEventService;
 import com.iotverify.service.PhoneService;
 import com.iotverify.service.UserService;
 import com.twilio.sdk.Twilio;
@@ -25,10 +27,7 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by lede on 5/17/16.
@@ -46,6 +45,9 @@ public class ApiController {
 
     @Autowired
     private PhoneService phoneService;
+
+    @Autowired
+    private LogEventService logEventService;
 
     @RequestMapping(value = "/tagIdentification", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
     public Map<String, Object> tagIdentify(@RequestBody MultiValueMap<String, String> parametersMultiMap) throws Exception {
@@ -375,6 +377,91 @@ public class ApiController {
 
                 return map;
             }
+
+        } else {
+            map.put("status", false);
+            map.put("error", "Invalid request from the application.");
+
+            return map;
+        }
+
+    }
+
+    @RequestMapping(value = "/tagRegistration", method = RequestMethod.POST, consumes =
+            {"application/x-www-form-urlencoded"})
+    public Map<String, Object> tagRegistration(@RequestBody MultiValueMap<String, String> parametersMultiMap) throws
+            Exception {
+
+        Map<String, Object> map = new HashMap<>();
+
+        Map<String, String> formParameters = parametersMultiMap.toSingleValueMap();
+
+
+        if (!(formParameters.get("tag_id") == null) && !formParameters.get("device_variables").isEmpty() &&
+                !(formParameters.get("device_variables") == null) && !(formParameters.get("username") == null )) {
+
+            String tagId = formParameters.get("tag_id");
+            String username = formParameters.get("username");
+
+            JsonParser parser = new JsonParser();
+            JsonObject deviceVarObj = (JsonObject) parser.parse(formParameters.get("device_variables"));
+
+            //define device fields
+            String androidId = deviceVarObj.get("android_id").toString();
+            String imei = deviceVarObj.get("imei").toString();
+            String deviceName = deviceVarObj.get("device_name").toString();
+            String serialNo = deviceVarObj.get("serial_no").toString();
+            String wifiMacAddress = deviceVarObj.get("wifi_mac_address").toString();
+            String deviceId = deviceVarObj.get("device_id").toString();
+
+            String deviceUdid = imei + "-" + androidId + "-" + serialNo;
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(deviceUdid.getBytes(), 0, deviceUdid.length());
+            String deviceCompUdid = new BigInteger(1, m.digest()).toString();
+
+            User user = userService.findByUserName(username);
+            Long userId = user.getUserId();
+
+
+            //save device
+            try {
+                Device device = new Device();
+                device.setUserId(userId);
+                device.setTagId(Long.parseLong(tagId));
+                device.setDeviceId(Long.parseLong(deviceId));
+                device.setAndroidId(androidId);
+                device.setImei(imei);
+                device.setDeviceName(deviceName);
+                device.setSerialNo(serialNo);
+                device.setWifiMacAddress(wifiMacAddress);
+                device.setDeviceCompUdid(deviceCompUdid);
+
+                deviceService.save(device);
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //save log
+            try {
+                LogEvent logEvent = new LogEvent();
+                logEvent.setEventName("Registration");
+                logEvent.setEventDescription("Uesr secure Registration");
+                logEvent.setCreationDate(new Date());
+                logEvent.setDeviceUUID(deviceCompUdid);
+                logEvent.setUserId(userId);
+                logEvent.setTagId(Long.parseLong(tagId));
+
+                logEventService.save(logEvent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            map.put("status", true);
+
+            return map;
 
         } else {
             map.put("status", false);

@@ -2,7 +2,6 @@ package com.iotverify.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Le on 4/11/2016.
@@ -21,7 +20,7 @@ public class LogEvent {
     @Column(name = "creation_date")
     private Date creationDate;
     @Column(name = "device_UUID")
-    private UUID deviceUUID;
+    private String deviceUUID;
     @Column(name = "user_id")
     private Long userId;
     @Column(name = "tag_id")
@@ -59,11 +58,11 @@ public class LogEvent {
         this.creationDate = creationDate;
     }
 
-    public UUID getDeviceUUID() {
+    public String getDeviceUUID() {
         return deviceUUID;
     }
 
-    public void setDeviceUUID(UUID deviceUUID) {
+    public void setDeviceUUID(String deviceUUID) {
         this.deviceUUID = deviceUUID;
     }
 

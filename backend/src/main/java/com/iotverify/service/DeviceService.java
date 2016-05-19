@@ -19,4 +19,6 @@ public interface DeviceService {
 
     List<Device> findByTagId (Long tagId);
 
+    Device save(Device device);
+
 }

@@ -41,4 +41,9 @@ public class DeviceServiceImpl implements DeviceService {
     public List<Device> findByTagId (Long tagId) {
         return deviceDao.findByTagId(tagId);
     }
+
+    public Device save(Device device) {
+        return deviceDao.save(device);
+    }
+
 }

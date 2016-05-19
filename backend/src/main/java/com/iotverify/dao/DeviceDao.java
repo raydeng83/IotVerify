@@ -22,4 +22,6 @@ public interface DeviceDao extends CrudRepository<Device, Long>{
     void delete (Long deviceId);
 
     List<Device> findByTagId (Long tagId);
+
+    Device save(Device device);
 }
