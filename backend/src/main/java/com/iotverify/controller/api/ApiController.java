@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by lede on 5/17/16.
@@ -209,7 +211,6 @@ public class ApiController {
             String deviceUdid = imei + "-" + androidId + "-" + serialNo;
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.update(deviceUdid.getBytes(), 0, deviceUdid.length());
-
             String deviceCompUdid = new BigInteger(1, m.digest()).toString(16);
 
             List<Device> devices = deviceService.findByTagId(Long.parseLong(tagId));
@@ -329,6 +330,69 @@ public class ApiController {
         Map<String, Object> map = new HashMap<>();
 
         Map<String, String> formParameters = parametersMultiMap.toSingleValueMap();
+
+
+        if (!(formParameters.get("tag_id") == null) && !formParameters.get("device_variables").isEmpty() &&
+                !(formParameters.get("device_variables") == null) && !(formParameters.get("username") == null &&
+                !(formParameters.get("password") == null ))) {
+
+            String tagId = formParameters.get("tag_id");
+            String username = formParameters.get("username");
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(formParameters.get("password").getBytes(StandardCharsets.UTF_8));
+            String password = hash.toString();
+
+
+            JsonParser parser = new JsonParser();
+            JsonObject deviceVarObj = (JsonObject) parser.parse(formParameters.get("device_variables"));
+
+            //define device fields
+            String androidId = deviceVarObj.get("android_id").toString();
+            String imei = deviceVarObj.get("imei").toString();
+            String deviceName = deviceVarObj.get("device_name").toString();
+            String serialNo = deviceVarObj.get("serial_no").toString();
+            String wifiMacAddress = deviceVarObj.get("wifi_mac_address").toString();
+
+            String deviceUdid = imei + "-" + androidId + "-" + serialNo;
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(deviceUdid.getBytes(), 0, deviceUdid.length());
+            String deviceCompUdid = new BigInteger(1, m.digest()).toString(16);
+
+            if (checkUserAuthentication(username,password)) {
+                User user = userService.findByUserName(username);
+                String tempToken = UUID.randomUUID().toString();
+                user.setTempToken(tempToken);
+                userService.save(user);
+
+                map.put("status", true);
+                map.put("token", tempToken);
+
+                return map;
+
+            } else {
+                map.put("status", false);
+                map.put("error", "Wrong password");
+
+                return map;
+            }
+
+        } else {
+            map.put("status", false);
+            map.put("error", "Invalid request from the application.");
+
+            return map;
+        }
+
+    }
+
+    boolean checkUserAuthentication (String username, String password) {
+        User user = userService.findByUserName(username);
+
+        if (user.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
