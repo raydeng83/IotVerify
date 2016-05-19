@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -347,7 +348,7 @@ public class ApiController {
             String username = formParameters.get("username");
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(formParameters.get("password").getBytes(StandardCharsets.UTF_8));
-            String password = hash.toString();
+            String password = DatatypeConverter.printHexBinary(hash).toLowerCase();
 
 
             JsonParser parser = new JsonParser();

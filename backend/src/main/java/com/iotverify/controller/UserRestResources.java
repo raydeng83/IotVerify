@@ -8,6 +8,9 @@ import com.iotverify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -52,6 +55,15 @@ public class UserRestResources {
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public User addUser(@RequestBody User user) {
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(user.getPassword().getBytes(StandardCharsets.UTF_8));
+            String password = DatatypeConverter.printHexBinary(hash).toLowerCase();
+            user.setPassword(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return  userService.save(user);
 
