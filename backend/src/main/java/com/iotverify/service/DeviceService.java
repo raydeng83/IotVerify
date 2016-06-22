@@ -11,6 +11,8 @@ public interface DeviceService {
 
     List<Device> findByDeviceCompUdid(String deviceCompUdid);
 
+    List<Device> findByUserId(Long userId);
+
     List<Device> findAll();
 
     void deleteByDeviceCompUdid(String userId);

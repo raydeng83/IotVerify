@@ -20,7 +20,7 @@ public class DeviceRestResources {
 
     @RequestMapping(value = "/userId", method = RequestMethod.POST)
     public List<Device> findDevicesByUserId (@RequestBody String userId) {
-        return deviceService.findByDeviceCompUdid(userId);
+        return deviceService.findByUserId(Long.parseLong(userId));
     }
 
     @RequestMapping("/allDevices")

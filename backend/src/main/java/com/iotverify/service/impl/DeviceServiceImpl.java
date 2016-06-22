@@ -27,6 +27,10 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceDao.findAll();
     }
 
+    public List<Device> findByUserId(Long userId) {
+        return deviceDao.findByUserId(userId);
+    }
+
 
     @Transactional
     public void deleteByDeviceCompUdid(String userId) {
@@ -45,5 +49,7 @@ public class DeviceServiceImpl implements DeviceService {
     public Device save(Device device) {
         return deviceDao.save(device);
     }
+
+
 
 }
